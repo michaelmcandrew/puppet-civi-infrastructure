@@ -6,6 +6,6 @@ node default {
 
 node 'argentina.thirdsectordesign.org' {
 
-     package { "emacs23-nox" : ensure => present }
+     inlcude apache
 
 }
