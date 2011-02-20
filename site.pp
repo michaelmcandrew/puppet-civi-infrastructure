@@ -1,6 +1,7 @@
 node default {
 
   package { "emacs23-nox" : ensure => present }
+  package { "git-core" : ensure => present }
   $monitor = "yes"
   $debug = "no"
   $monitor_type = ["munin"]
