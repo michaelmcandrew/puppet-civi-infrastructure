@@ -15,6 +15,8 @@ node webserver inherits default {
   package { "drush" : ensure => present }
   package { "php-apc" : ensure => present }
   package { "php5-gd" : ensure => present }
+  package { "php5-curl" : ensure => present }
+
   
   php::module { mysql : }
   # need to work out how to include mod_ssl and mod_rewrite
