@@ -8,7 +8,7 @@ node webserver inherits default {
 
     include apache, php, mysql
     package { "php-apc" : ensure => present }
-    package { "php-gd" : ensure => present }
+    package { "php5-gd" : ensure => present }
     
     # need to work out how to include mod_ssl and mod_rewrite
     # 
