@@ -25,7 +25,7 @@ node 'argentina.thirdsectordesign.org' inherits webserver {
 }
 
 node 'chile.thirdsectordesign.org' inherits default {
-  include nagios, munin
+  include munin
   
 }
 
