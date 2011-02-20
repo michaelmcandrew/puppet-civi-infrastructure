@@ -30,6 +30,9 @@ node basenode {
   
   include nagios
   include munin
+  
+  package { "emacs-23-nox": ensure => installed }
+  package { "php-elisp": ensure => installed }
 
 }
 
@@ -49,23 +52,19 @@ node 'chile.thirdsectordesign.org' inherits basenode {
 
 }
 
-
-node 'argentina.thirdsectordesign.org' inherits basenode {
-
+node webserver inherits basenode {
   include general
 	include apache
 	include mysql
+	include php
 	include postfix
-	
+  
 }
 
-node 'brazil.thirdsectordesign.org' inherits basenode {
+node 'argentina.thirdsectordesign.org' inherits webserver {
+}
 
-  include general
-	include apache
-	include mysql
-	include postfix
-	
+node 'brazil.thirdsectordesign.org' inherits webserver {	
 }
 
 node 'bolivia.thirdsectordesign.org' inherits basenode {
