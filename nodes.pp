@@ -41,7 +41,7 @@ node basenode {
 node 'chile.thirdsectordesign.org' inherits basenode {
 
 # Access lists for Puppetmaster access (can be an array)
-	$puppet_allow = [ "thirdsectordesign.org" ]
+	$puppet_allow = [ "*.thirdsectordesign.org" ]
 
 	include general
 	include puppet
@@ -70,15 +70,13 @@ node 'brazil.thirdsectordesign.org' inherits webserver {
 node 'bolivia.thirdsectordesign.org' inherits basenode {
 
 	include general
-	include backup::server
-	include nagios
+	include backup
 
 }
 
 node 'colombia.thirdsectordesign.org' inherits basenode {
 
 	include general
-	include backup::server
-	include nagios
+	include backup
 
 }
