@@ -1,0 +1,85 @@
+node basenode {
+  
+  $my_project = "civi-infrastructure"
+	$debug = "yes"
+
+# Activates usage of Extended Classes
+	$monitor = "yes"
+	$monitor_type = ["munin"]
+	$backup = "no"
+	$firewall = "no"
+
+# Puppet Master - required
+  $puppet_server = "chile.thirdsectordesign.org"
+
+# Network settings
+  $domain = "thirdsectordesign.org"
+
+# Local root mail is forwarded to $root_email - CHANGE IT!
+  $root_email = "michaelmcandrew@thirdsectordesign.org"
+
+# Time settings
+  $timezone = "Europe/London"
+  $ntp_server = "3.ie.pool.ntp.org"
+
+# Aptitude
+  $update = "yes"   # Auto Update packages (yes|no)
+
+# Munin central server (chile)
+  $munin_server = "46.137.110.35"
+  
+  include nagios
+  include munin
+
+}
+
+### chile.thirdsectordesign.org ###
+
+node 'chile.thirdsectordesign.org' inherits basenode {
+
+# Access lists for Puppetmaster access (can be an array)
+	$puppet_allow = [ "thirdsectordesign.org" ]
+
+	include general
+	include puppet
+	include ssh::auth::keymaster
+	include monitor::server
+	include monitor::server::nagios
+	include nagios
+
+}
+
+
+node 'argentina.thirdsectordesign.org' inherits basenode {
+
+  include general
+	include apache
+	include mysql
+	include postfix
+	
+}
+
+node 'brazil.thirdsectordesign.org' inherits basenode {
+
+  include general
+	include apache
+	include mysql
+	include postfix
+	
+}
+
+node 'bolivia.thirdsectordesign.org' inherits basenode {
+
+	include general
+	include backup::server
+	include nagios
+
+}
+
+node 'colombia.thirdsectordesign.org' inherits basenode {
+
+	include general
+	include backup::server
+	include nagios
+
+}
