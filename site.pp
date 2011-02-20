@@ -11,7 +11,8 @@ node default {
 
 node webserver inherits default {
 
-  include apache, php, mysql
+  include apache, php, mysql, postfix
+  
   package { "drush" : ensure => present }
   package { "php-apc" : ensure => present }
   package { "php5-gd" : ensure => present }
