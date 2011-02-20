@@ -6,6 +6,6 @@ node default {
 
 node 'argentina.thirdsectordesign.org' {
 
-     inlcude apache
+     include apache
 
 }
