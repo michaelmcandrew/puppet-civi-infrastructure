@@ -2,6 +2,7 @@ node default {
 
   package { "emacs23-nox" : ensure => present }
   $monitor = "yes"
+  $debug = "no"
   $monitor_type = ["munin"]
   $puppet_server = "chile.thirdsectordesign.org"
   $munin_server = "10.234.35.165"
@@ -26,6 +27,7 @@ node 'argentina.thirdsectordesign.org' inherits webserver {
 
 node 'chile.thirdsectordesign.org' inherits default {
   include munin
+  $munin_server_local = "yes"
   
 }
 
