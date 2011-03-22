@@ -1,23 +1,18 @@
 node default {
 
-  $puppet_server = "chile.thirdsectordesign.org" # not sure if necessary
-
-  package { "emacs23-nox" : ensure => present } # really necessary at this high level?
-  package { "git-core" : ensure => present } # really necessary at this high level?
+  package { ["emacs23-nox", "git-core", "php-elisp"] : ensure => present } # really necessary at this high level? if so, also add php-elisp
   
   # TODO work out how to properly implement monitoring
-  $monitor = "yes" 
-  $monitor_type = ["munin"]
-  $munin_server = "10.234.35.165"
-
-  $debug = "no" # not sure if this is actually making any difference
+  
 }
 
 node webserver inherits default {
 
   include apache, php, mysql, postfix
   
-  package { "drush" : ensure => present }
+  # set /etc/aliases to be root: michaelmcandrew@thirdsectordesign.org and subscribe newaliases or somin
+  
+  # package { "drush" : ensure => present } # need to replace this with actually downloading the latest drush and setting it up according to drush installation instructions in the drush readme
   
   package { "php-apc" : ensure => present }
   package { "php5-gd" : ensure => present }
@@ -36,12 +31,21 @@ node webserver inherits default {
 }
 
 node 'argentina.thirdsectordesign.org' inherits webserver {
+  # need to create fstab that mounts /dev/sdf on /backup ?? really?? - maybe need to get more sophisticated
+  # need to add access to mysql from remote hosts as specified by Rob Stead (/etc/mysql/my.cnf don't bind to localhost and add access access for specific users from specific IPs)
+  )
+}
+node 'bolivia.thirdsectordesign.org' inherits webserver {
+  # need to create fstab that mounts /dev/sdf on /backup
+}
+
+node 'brazil.thirdsectordesign.org' inherits webserver {
+  
+  # need to create fstab that mounts /dev/sdf on /backup
+  # redirect all postfix mail to NULL
 }
 
 node 'chile.thirdsectordesign.org' inherits default {
-  include munin
-  $munin_server_local = "yes"
-  
 }
 
 
