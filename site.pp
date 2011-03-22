@@ -20,22 +20,28 @@ node webserver inherits default {
   # i think that the above php modules can be enabled using the php::module { mysql : } syntax below
   
   php::module { mysql : }
-  # TODO need to work out how to include mod_ssl and mod_rewrite
+  # TODO need to work out how to enable mod_ssl and mod_rewrite
   # could be like this: https://github.com/puppet-modules/puppet-apache/raw/master/manifests/init.pp
   # or maybe there is the 42 way of doing it
   
-  # TODO need to also download the civihosting scripts to handle cron (or switch to aegir!)
   
+
+}
+
+node productionserver inherits webserver{
   # TODO need to ensure that backups (inc. remote backups) are happening (currently can be handled with civihosting scripts)
-
-}
-
-node 'argentina.thirdsectordesign.org' inherits webserver {
+  # TODO need to also download the civihosting scripts to handle cron (or switch to aegir!)
   # need to create fstab that mounts /dev/sdf on /backup ?? really?? - maybe need to get more sophisticated
-  # need to add access to mysql from remote hosts as specified by Rob Stead (/etc/mysql/my.cnf don't bind to localhost and add access access for specific users from specific IPs)
+  # need to add access to mysql from remote hosts as specified by Rob Stead (/etc/mysql/my.cnf don't bind to localhost and add access access for specific users from specific IPs)  
 }
-node 'bolivia.thirdsectordesign.org' inherits webserver {
+
+node 'argentina.thirdsectordesign.org' inherits productionserver {
+
+}
+node 'bolivia.thirdsectordesign.org' inherits default {
   # need to create fstab that mounts /dev/sdf on /backup
+  # note i mistakenly installed the webserver config on this by making bolivia inherit webserver.  I'm not sure if this will be removed when i say it just inherits default
+  # todo - recreate bolivia so it doesn't have the unecc. stuff on it.
 }
 
 node 'brazil.thirdsectordesign.org' inherits webserver {
@@ -43,6 +49,7 @@ node 'brazil.thirdsectordesign.org' inherits webserver {
   # redirect all postfix mail to NULL
 }
 
-
-
-
+node 'colombia.thirdsectordesign.org' inherits productionserver {
+  # need to create fstab that mounts /dev/sdf on /backup
+  # redirect all postfix mail to NULL
+}
