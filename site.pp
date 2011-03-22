@@ -12,6 +12,8 @@ node webserver inherits default {
   
   # set /etc/aliases to be root: michaelmcandrew@thirdsectordesign.org and subscribe newaliases or somin
   
+  # do we also inlcude a .my.cnf file?
+  
   # package { "drush" : ensure => present } # need to replace this with actually downloading the latest drush and setting it up according to drush installation instructions in the drush readme
   
   package { "php-apc" : ensure => present }
@@ -35,7 +37,7 @@ node productionserver inherits webserver{
   # need to add access to mysql from remote hosts as specified by Rob Stead (/etc/mysql/my.cnf don't bind to localhost and add access access for specific users from specific IPs)  
 }
 
-node 'argentina.thirdsectordesign.org' inherits productionserver {
+node 'argentina.thirdsectordesign.org' inherits webserver {
 
 }
 node 'bolivia.thirdsectordesign.org' inherits default {
@@ -49,7 +51,7 @@ node 'brazil.thirdsectordesign.org' inherits webserver {
   # redirect all postfix mail to NULL
 }
 
-node 'colombia.thirdsectordesign.org' inherits productionserver {
+node 'colombia.thirdsectordesign.org' inherits webserver {
   # need to create fstab that mounts /dev/sdf on /backup
   # redirect all postfix mail to NULL
 }
