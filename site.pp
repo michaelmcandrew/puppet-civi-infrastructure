@@ -33,20 +33,16 @@ node webserver inherits default {
 node 'argentina.thirdsectordesign.org' inherits webserver {
   # need to create fstab that mounts /dev/sdf on /backup ?? really?? - maybe need to get more sophisticated
   # need to add access to mysql from remote hosts as specified by Rob Stead (/etc/mysql/my.cnf don't bind to localhost and add access access for specific users from specific IPs)
-  )
 }
 node 'bolivia.thirdsectordesign.org' inherits webserver {
   # need to create fstab that mounts /dev/sdf on /backup
 }
 
 node 'brazil.thirdsectordesign.org' inherits webserver {
-  
   # need to create fstab that mounts /dev/sdf on /backup
   # redirect all postfix mail to NULL
 }
 
-node 'chile.thirdsectordesign.org' inherits default {
-}
 
 
 
